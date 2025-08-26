@@ -1,0 +1,15 @@
+- name: istall nginx
+  hosts: web
+  become: yes
+  serial: 10
+  tasks:
+    - name: install nginx
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+    - name: run nginx
+      tags:
+        - run
+      ansible.builtin.services:
+        name: nginx
+        state: started
